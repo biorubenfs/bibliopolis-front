@@ -13,9 +13,13 @@ export interface ApiBookEntity {
   attributes: ApiBookAttributes
 }
 
-export interface ApiBookResponse {
+export interface ApiBooksListResponse {
   results: Array<ApiBookEntity>
   paginatinIndo: unknown
+}
+
+export interface ApiBookResponse {
+  results: ApiBookEntity
 }
 
 export interface Book extends ApiBookAttributes {
