@@ -2,10 +2,15 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { LibrariesPageComponent } from './pages/libraries-page/libraries-page.component';
 import { ExplorePageComponent } from './pages/explore-page/explore-page.component';
+import { BookDetailsPageComponent } from './pages/book-details-page/book-details-page.component';
 
 export const routes: Routes = [
+  // {
+  //   path: 'login',
+  //   component: LoginComponent
+  // },
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent,
     children: [
       {
@@ -17,6 +22,10 @@ export const routes: Routes = [
         component: ExplorePageComponent
       },
       {
+        path: 'books/:id',
+        component: BookDetailsPageComponent
+      },
+      {
         path: '**',
         redirectTo: 'libraries'
       }
@@ -24,6 +33,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: ''
   }
 ];

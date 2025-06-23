@@ -2,5 +2,5 @@
   <img [src]="book().coverUrl">
   <h2 class="text-lg">{{book().title}}</h2>
   <h3 class="text-sm">{{book().authors.join('-')}}</h3>
-  <button class="btn btn-primary">Ver</button>
+  <a [routerLink]="['/books', book().id]" class="btn btn-primary">Ver</a>
 </div>
