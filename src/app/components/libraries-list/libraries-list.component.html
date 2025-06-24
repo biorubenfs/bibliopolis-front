@@ -1,1 +1,3 @@
-<p>libraries-list works!</p>
+@for (library of libraries(); track library.id) {
+  <library-card [library]="library"></library-card>
+}

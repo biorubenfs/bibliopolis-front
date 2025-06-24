@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
+import { Library } from '../../interfaces/api.interfaces';
 
 @Component({
   selector: 'library-card',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   templateUrl: './library-card.component.html',
 })
 export class LibraryCardComponent {
-
+  library = input.required<Library>()
 }

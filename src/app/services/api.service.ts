@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { ApiBookResponse, ApiBooksListResponse, Book } from '../interfaces/api.interfaces';
+import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, Book, Library } from '../interfaces/api.interfaces';
 import { BookMapper } from '../mappers/book.mapper';
+import { LibraryMapper } from '../mappers/library.mapper';
 
 const API_URL = 'http://localhost:3000'
 
@@ -33,6 +34,20 @@ export class ApiService {
         catchError((error) => {
           console.log(error)
           return throwError(() => new Error('cannot fetch books'))
+        })
+      )
+  }
+
+  getUserLibraries(): Observable<Array<Library>> {
+    const headers = new HttpHeaders({Authorization: "Bearer"})
+
+    return this.http
+      .get<ApiLibrariesListResponse>(`${API_URL}/libraries`, {headers})
+      .pipe(
+        map((res) => LibraryMapper.apiLibrariesToLibraries(res.results)),
+        catchError((error) => {
+          console.log(error)
+          return throwError(() => new Error('cannot fetch libraries'))
         })
       )
   }
