@@ -1,1 +1,7 @@
-<p>login works!</p>
+<div class="h-screen flex flex-col items-center justify-center">
+  <input class="bg-white text-black" type="email" [value]="email()" placeholder="email" (change)="email.set(txtEmail.value)"
+    #txtEmail (input)="email.set(txtEmail.value)" required>
+  <input class="bg-white text-black" type="password" [value]="password()" placeholder="contraseña"
+    (change)="password.set(txtPassword.value)" #txtPassword (input)="password.set(txtPassword.value)" required>
+  <button (click)="login()" class="btn btn-primary">Login</button>
+</div>

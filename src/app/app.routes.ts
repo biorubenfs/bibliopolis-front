@@ -4,12 +4,13 @@ import { LibrariesPageComponent } from './pages/libraries-page/libraries-page.co
 import { ExplorePageComponent } from './pages/explore-page/explore-page.component';
 import { BookDetailsPageComponent } from './pages/book-details-page/book-details-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { LoginComponent } from './layouts/login/login.component';
 
 export const routes: Routes = [
-  // {
-  //   path: 'login',
-  //   component: LoginComponent
-  // },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: '',
     component: DashboardComponent,

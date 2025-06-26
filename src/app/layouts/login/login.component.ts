@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  private apiService = inject(ApiService);
+
+  email = signal<string>('')
+  password = signal<string>('')
+
+  login() {
+    this.apiService.login(this.email(), this.password()).subscribe(res => console.log({res}))
+
+
+  }
 }
