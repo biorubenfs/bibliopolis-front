@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiUserResponse, Book, Library, User } from '../interfaces/api.interfaces';
+import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiLibraryResponse, ApiUserResponse, Book, Library, User } from '../interfaces/api.interfaces';
 import { BookMapper } from '../mappers/book.mapper';
 import { LibraryMapper } from '../mappers/library.mapper';
 import { UserMapper } from '../mappers/user.mapper';
@@ -40,15 +40,31 @@ export class ApiService {
   }
 
   getUserLibraries(): Observable<Array<Library>> {
-    const headers = new HttpHeaders({Authorization: "Bearer"})
+    const headers = new HttpHeaders({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxSjlCSFdaOE40QjFKQlNBRkNCS1FHRVJTIiwicm9sZSI6InJlZ3VsYXIiLCJpYXQiOjE3NTA5Nzg0MjQsImV4cCI6MTc1MTAzODQyNH0.ouB1gB2xSizsjk0c14p8blEPg4X_6srnZjAQBjAKHJk"})
 
     return this.http
       .get<ApiLibrariesListResponse>(`${API_URL}/libraries`, {headers})
       .pipe(
         map((res) => LibraryMapper.apiLibrariesToLibraries(res.results)),
+
         catchError((error) => {
           console.log(error)
           return throwError(() => new Error('cannot fetch libraries'))
+        })
+      )
+  }
+
+  getLibraryById(id: string): Observable<Library> {
+    const headers = new HttpHeaders({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxSjlCSFdaOE40QjFKQlNBRkNCS1FHRVJTIiwicm9sZSI6InJlZ3VsYXIiLCJpYXQiOjE3NTA5Nzg0MjQsImV4cCI6MTc1MTAzODQyNH0.ouB1gB2xSizsjk0c14p8blEPg4X_6srnZjAQBjAKHJk"})
+
+    return this.http
+      .get<ApiLibraryResponse>(`${API_URL}/libraries/${id}`, {headers})
+      .pipe(
+        map((res) => LibraryMapper.apiLibraryToLibrary(res.results)),
+
+        catchError((error) => {
+          console.log(error)
+          return throwError(() => new Error('cannot fetch library'))
         })
       )
   }
