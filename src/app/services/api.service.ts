@@ -12,12 +12,11 @@ const API_URL = 'http://localhost:3000'
   providedIn: 'root'
 })
 export class ApiService {
-
   private http = inject(HttpClient)
 
   getLastAddedBooks(): Observable<Array<Book>> {
     return this.http
-      .get<ApiBooksListResponse>(`${API_URL}/books`)
+      .get<ApiBooksListResponse>(`${API_URL}/books`, { withCredentials: true })
       .pipe(
         map((res) => BookMapper.apiBooksToBooks(res.results)),
         catchError((error) => {
@@ -29,7 +28,7 @@ export class ApiService {
 
   getBookById(id: string): Observable<Book> {
     return this.http
-      .get<ApiBookResponse>(`${API_URL}/books/${id}`)
+      .get<ApiBookResponse>(`${API_URL}/books/${id}`, { withCredentials: true })
       .pipe(
         map((res) => BookMapper.apiBookToBook(res.results)),
         catchError((error) => {
@@ -40,10 +39,8 @@ export class ApiService {
   }
 
   getUserLibraries(): Observable<Array<Library>> {
-    const headers = new HttpHeaders({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxSjlCSFdaOE40QjFKQlNBRkNCS1FHRVJTIiwicm9sZSI6InJlZ3VsYXIiLCJpYXQiOjE3NTA5Nzg0MjQsImV4cCI6MTc1MTAzODQyNH0.ouB1gB2xSizsjk0c14p8blEPg4X_6srnZjAQBjAKHJk"})
-
     return this.http
-      .get<ApiLibrariesListResponse>(`${API_URL}/libraries`, {headers})
+      .get<ApiLibrariesListResponse>(`${API_URL}/libraries`, { withCredentials: true })
       .pipe(
         map((res) => LibraryMapper.apiLibrariesToLibraries(res.results)),
 
@@ -55,10 +52,8 @@ export class ApiService {
   }
 
   getLibraryById(id: string): Observable<Library> {
-    const headers = new HttpHeaders({Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxSjlCSFdaOE40QjFKQlNBRkNCS1FHRVJTIiwicm9sZSI6InJlZ3VsYXIiLCJpYXQiOjE3NTA5Nzg0MjQsImV4cCI6MTc1MTAzODQyNH0.ouB1gB2xSizsjk0c14p8blEPg4X_6srnZjAQBjAKHJk"})
-
     return this.http
-      .get<ApiLibraryResponse>(`${API_URL}/libraries/${id}`, {headers})
+      .get<ApiLibraryResponse>(`${API_URL}/libraries/${id}`, { withCredentials: true })
       .pipe(
         map((res) => LibraryMapper.apiLibraryToLibrary(res.results)),
 
@@ -69,9 +64,34 @@ export class ApiService {
       )
   }
 
+  deleteLibraryById(id: string): Observable<void> {
+    return this.http
+      .delete<void>(`${API_URL}/libraries/${id}`, { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.log(error)
+          return throwError(() => new Error('cannot delete library'))
+        })
+      )
+  }
+
+  createLibrary(): Observable<Library> {
+    const mockBody = {name: `new-library${Math.round(Math.random() * 100)}`, description: "created from frontend"}
+
+    return this.http
+      .post<Library>(`${API_URL}/libraries`, mockBody , { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.log(error)
+          return throwError(() => new Error('cannot create library'))
+        })
+      )
+
+  }
+
   login(email: string, password: string): Observable<User> {
     return this.http
-      .post<ApiUserResponse>(`${API_URL}/auth/login`, { email, password })
+      .post<ApiUserResponse>(`${API_URL}/auth/login`, { email, password }, {withCredentials: true})
       .pipe(
         map((res) => UserMapper.apiUserToUser(res.results)),
         catchError((error) => {
@@ -83,7 +103,7 @@ export class ApiService {
 
   logout() {
     return this.http
-      .post(`${API_URL}/logout`, {})
+      .post(`${API_URL}/logout`, {}, {withCredentials: true})
       .pipe(
         catchError((error) => {
           console.log(error)
