@@ -22,6 +22,6 @@
 
 
 @for (library of libraries(); track library.id) {
-<library-card [library]="library"></library-card>
+<library-card [library]="library" (_deleteLibrary)="_deleteLibrary.emit($event)"></library-card>
 <hr>
 }
