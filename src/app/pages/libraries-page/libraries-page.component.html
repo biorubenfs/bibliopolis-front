@@ -1,2 +1,3 @@
-<h2 class="text-5xl text-center">Mis bibliotecas</h2>
-<libraries-list [libraries]="libraries()"></libraries-list>
+<h2 class="text-center">Mis bibliotecas</h2>
+<button class="btn btn-success" (click)="createLibrary()">Nueva Biblioteca</button>
+<libraries-list [libraries]="libraries()" (_deleteLibrary)="deleteLibrary($event)"></libraries-list>
