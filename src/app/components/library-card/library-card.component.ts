@@ -1,7 +1,8 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Library } from '../../interfaces/api.interfaces';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'library-card',
@@ -10,4 +11,12 @@ import { RouterLink } from '@angular/router';
 })
 export class LibraryCardComponent {
   library = input.required<Library>()
+
+  apiService = inject(ApiService)
+
+  _deleteLibrary = output<string>()
+
+  deleteLibraryById(): void {
+    this._deleteLibrary.emit(this.library().id)
+  }
 }
