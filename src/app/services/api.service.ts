@@ -101,9 +101,9 @@ export class ApiService {
       )
   }
 
-  logout() {
+  logout(): Observable<void> {
     return this.http
-      .post(`${API_URL}/logout`, {}, {withCredentials: true})
+      .post<void>(`${API_URL}/auth/logout`, {}, {withCredentials: true})
       .pipe(
         catchError((error) => {
           console.log(error)
