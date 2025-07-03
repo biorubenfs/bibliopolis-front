@@ -32,6 +32,11 @@ jobs:
       # {4}
       - name: Install dependencies
         run: npm ci
+
       # {5}
       - name: Build
         run: npm run build
+
+      # {6}
+      - name: tests
+        run: npm run test -- --browsers=ChromeHeadless --watch=false

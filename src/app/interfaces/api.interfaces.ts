@@ -1,4 +1,4 @@
-enum EntityType {
+export enum EntityType {
   Book = 'books',
   Library = 'libraries',
   User = 'user'
