@@ -38,6 +38,12 @@ jobs:
         run: npm run build
 
   tests:
-    - name: Tests
-      run: npm run test -- --browsers=ChromeHeadless --watch=false
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      - name: Tests
+        run: npm run test -- --browsers=ChromeHeadless --watch=false
       
