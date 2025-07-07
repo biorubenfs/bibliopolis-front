@@ -75,8 +75,9 @@ export class ApiService {
       )
   }
 
-  createLibrary(): Observable<Library> {
-    const mockBody = {name: `new-library${Math.round(Math.random() * 100)}`, description: "created from frontend"}
+  createLibrary(name: string, description: string): Observable<Library> {
+    // const mockBody = { name: `new-library${Math.round(Math.random() * 100)}`, description: "created from frontend" }
+    const mockBody = { name, description}
 
     return this.http
       .post<Library>(`${API_URL}/libraries`, mockBody , { withCredentials: true })

@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title">Nueva Biblioteca</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="libraryForm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input formControlName="name" id="name" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea formControlName="description" id="description" class="form-control"></textarea>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+  <button class="btn btn-success" (click)="submit()" [disabled]="libraryForm.invalid">Crear</button>
+</div>
