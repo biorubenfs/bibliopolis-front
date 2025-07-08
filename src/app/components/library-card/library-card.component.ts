@@ -2,9 +2,8 @@ import { Component, computed, inject, input, output } from '@angular/core';
 import { Library } from '../../interfaces/api.interfaces';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ApiService } from '../../services/api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DeleteLibraryModalComponent } from '../delete-library-modal/delete-library-modal.component';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'library-card',
@@ -16,13 +15,12 @@ export class LibraryCardComponent {
   library = input.required<Library>()
   totalBooks = computed<number>(() => this.library.length)
 
-  apiService = inject(ApiService)
-
   _deleteLibrary = output<string>()
 
   deleteLibraryById() {
-    const modalRef = this.modalService.open(DeleteLibraryModalComponent);
-    // modalRef.componentInstance.libraryName = this.library().name
+    const modalRef = this.modalService.open(ConfirmModalComponent);
+    modalRef.componentInstance.message = 'Esta acción eliminará la biblioteca'
+    modalRef.componentInstance.item = this.library().name
 
     modalRef.result
       .then((confirmed) => {
@@ -30,9 +28,6 @@ export class LibraryCardComponent {
           this._deleteLibrary.emit(this.library().id)
         }
       })
-      .catch(() => {
-        // Cancelado
-      });
+      .catch(() => {});
   }
-
 }
