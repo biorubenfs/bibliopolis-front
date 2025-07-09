@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Library } from '../../interfaces/api.interfaces';
 import { LibraryCardComponent } from '../library-card/library-card.component';
 

@@ -1,0 +1,25 @@
+<section>
+  <div class="d-flex flex-row">
+    <div class="col-4 d-flex align-items-center">
+      <p class="fw-bold mb-0 text-start w-100">Título</p>
+    </div>
+
+    <div class="col-5 d-flex align-items-center">
+      <p class="fw-bold mb-0 text-start w-100">Autores</p>
+    </div>
+
+    <div class="col-2 d-flex align-items-center">
+      <p class="fw-bold mb-0 text-start w-100">ISBN</p>
+    </div>
+
+    <div class="col-1 d-flex align-items-center">
+      <p class="fw-bold mb-0 text-center w-100">Acciones</p>
+    </div>
+  </div>
+  <hr>
+</section>
+
+@for (book of userBooksResource.value(); track book.id) {
+  <app-user-book-card [userBook]="book"></app-user-book-card>
+<hr>
+}

@@ -13,27 +13,4 @@
   </div>
 </div>
 
-<hr>
-
-<section>
-  <hr>
-  <div class="d-flex flex-row">
-    <div class="col-2 d-flex align-items-center">
-      <p class="fw-bold mb-0 text-start w-100">Título</p>
-    </div>
-
-    <div class="col-5 d-flex align-items-center">
-      <p class="fw-bold mb-0 text-start w-100">Authors</p>
-    </div>
-
-    <div class="col-1 d-flex align-items-center">
-      <p class="fw-bold mb-0 text-center w-100">Acciones</p>
-    </div>
-  </div>
-  <hr>
-</section>
-
-@for (book of userBooksResource.value(); track book.id) {
-<span>{{book.bookTitle}}</span>
-<hr>
-}
+<app-user-books-list [libraryId]="this.libraryId"></app-user-books-list>
