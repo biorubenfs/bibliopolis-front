@@ -1,7 +1,8 @@
 export enum EntityType {
   Book = 'books',
   Library = 'libraries',
-  User = 'user'
+  User = 'user',
+  UserBook = 'user-books'
 }
 
 interface PaginationInfo {
@@ -29,9 +30,22 @@ interface ApiLibraryAttributes {
 }
 
 export interface ApiUserAttributes {
-  name: string,
+  name: string
   email: string
   role: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface ApiUserBookAttributes {
+  bookId: string
+  libraries: Array<string>
+  userId: string
+  bookTitle: string
+  bookAuthors: Array<string>
+  bookCover: number
+  notes: string
+  rating: number
   createdAt: Date
   updatedAt: Date
 }
@@ -45,6 +59,7 @@ type ApiEntity<EntityType, T> = {
 export type ApiBookEntity = ApiEntity<EntityType.Book, ApiBookAttributes>
 export type ApiLibraryEntity = ApiEntity<EntityType.Library, ApiLibraryAttributes>
 export type ApiUserEntity = ApiEntity<EntityType.User, ApiUserAttributes>
+export type ApiUserBookEntity = ApiEntity<EntityType.UserBook, ApiUserBookAttributes>
 
 /* API responses */
 /* BOOKS */
@@ -81,6 +96,16 @@ export interface ApiUserResponse {
 }
 
 export interface User extends ApiUserAttributes {
+  id: string
+}
+
+/* UserBooks */
+export interface ApiUserBooksListResponse  {
+  results: Array<ApiUserBookEntity>
+  paginationInfo: PaginationInfo
+}
+
+export interface UserBook extends ApiUserBookAttributes {
   id: string
 }
 

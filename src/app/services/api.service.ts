@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiLibraryResponse, ApiUserResponse, Book, Library, User } from '../interfaces/api.interfaces';
+import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiLibraryResponse, ApiUserBooksListResponse, ApiUserResponse, Book, Library, User, UserBook } from '../interfaces/api.interfaces';
 import { BookMapper } from '../mappers/book.mapper';
 import { LibraryMapper } from '../mappers/library.mapper';
 import { UserMapper } from '../mappers/user.mapper';
+import { UserBookMapper } from '../mappers/user-book.mapper';
 
 const API_URL = 'http://localhost:3000'
 
@@ -76,23 +77,33 @@ export class ApiService {
   }
 
   createLibrary(name: string, description: string): Observable<Library> {
-    // const mockBody = { name: `new-library${Math.round(Math.random() * 100)}`, description: "created from frontend" }
-    const mockBody = { name, description}
+    const body = { name, description }
 
     return this.http
-      .post<Library>(`${API_URL}/libraries`, mockBody , { withCredentials: true })
+      .post<Library>(`${API_URL}/libraries`, body, { withCredentials: true })
       .pipe(
         catchError((error) => {
           console.log(error)
           return throwError(() => new Error('cannot create library'))
         })
       )
+  }
 
+  getLibraryBooks(id: string): Observable<Array<UserBook>> {
+    return this.http
+      .get<ApiUserBooksListResponse>(`${API_URL}/libraries/${id}/books`, { withCredentials: true })
+      .pipe(
+        map((res) => UserBookMapper.apiUserBooksToUserBooks(res.results)),
+        catchError((error) => {
+          console.log(error)
+          return throwError(() => new Error('cannot get user books'))
+        })
+      )
   }
 
   login(email: string, password: string): Observable<User> {
     return this.http
-      .post<ApiUserResponse>(`${API_URL}/auth/login`, { email, password }, {withCredentials: true})
+      .post<ApiUserResponse>(`${API_URL}/auth/login`, { email, password }, { withCredentials: true })
       .pipe(
         map((res) => UserMapper.apiUserToUser(res.results)),
         catchError((error) => {
@@ -104,7 +115,7 @@ export class ApiService {
 
   logout(): Observable<void> {
     return this.http
-      .post<void>(`${API_URL}/auth/logout`, {}, {withCredentials: true})
+      .post<void>(`${API_URL}/auth/logout`, {}, { withCredentials: true })
       .pipe(
         catchError((error) => {
           console.log(error)

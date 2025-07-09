@@ -1,5 +1,5 @@
-import { Component, inject, input } from '@angular/core';
-import { Library } from '../../interfaces/api.interfaces';
+import { Component, inject, input, signal } from '@angular/core';
+import { Library, UserBook } from '../../interfaces/api.interfaces';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -20,6 +20,14 @@ export class LibraryDetailsPageComponent {
     loader: ({ request }) => {
       if (!request) return of();
       return this.apiService.getLibraryById(request.libraryId);
+    }
+  });
+
+  userBooksResource = rxResource({
+    request: () => ({ libraryId: this.libraryId }),
+    loader: ({ request }) => {
+      if (!request) return of();
+      return this.apiService.getLibraryBooks(request.libraryId);
     }
   });
 }

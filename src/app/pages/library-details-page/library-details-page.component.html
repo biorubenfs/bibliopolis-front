@@ -1,3 +1,39 @@
-<p>library-details-page works!</p>
-<span>{{libraryResource.value()?.id}}</span>
-<span>{{libraryResource.value()?.description}}</span>
+<h2 class="text-center">{{libraryResource.value()?.name}}</h2>
+
+<div class="p-3 mb-3" style="border: 0.1rem solid lightgrey; border-radius: 10px;">
+  <h5>Detalles de la librería</h5>
+  <div class="col-3">
+    <div class="mb-3">
+      <input type="text" class="form-control" [placeholder]="libraryResource.value()?.name">
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" [placeholder]="libraryResource.value()?.description">
+    </div>
+    <button class="btn btn-success">Actualizar</button>
+  </div>
+</div>
+
+<hr>
+
+<section>
+  <hr>
+  <div class="d-flex flex-row">
+    <div class="col-2 d-flex align-items-center">
+      <p class="fw-bold mb-0 text-start w-100">Título</p>
+    </div>
+
+    <div class="col-5 d-flex align-items-center">
+      <p class="fw-bold mb-0 text-start w-100">Authors</p>
+    </div>
+
+    <div class="col-1 d-flex align-items-center">
+      <p class="fw-bold mb-0 text-center w-100">Acciones</p>
+    </div>
+  </div>
+  <hr>
+</section>
+
+@for (book of userBooksResource.value(); track book.id) {
+<span>{{book.bookTitle}}</span>
+<hr>
+}
