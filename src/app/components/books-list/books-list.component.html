@@ -1,7 +1,9 @@
 <div class="p-4">
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10">
+  <div class="row g-4">
     @for (book of books(); track book.id) {
-      <book-card [book]="book" class="h-full" />
+      <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+        <book-card [book]="book" />
+      </div>
     }
   </div>
 </div>

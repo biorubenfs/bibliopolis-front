@@ -4,7 +4,9 @@ export class LibraryMapper {
   static apiLibraryToLibrary(library: ApiLibraryEntity): Library {
     return {
       id: library.id,
-      ...library.attributes
+      ...library.attributes,
+      createdAt: new Date(library.attributes.createdAt),
+      updatedAt: new Date(library.attributes.updatedAt)
     }
   }
 

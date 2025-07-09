@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
-import { SideMenuHeaderComponent } from "./side-menu-header/side-menu-header.component";
-import { SideMenuOptionsComponent } from "./side-menu-options/side-menu-options.component";
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-side-menu',
-  imports: [SideMenuHeaderComponent, SideMenuOptionsComponent],
+  imports: [RouterLink],
   templateUrl: './side-menu.component.html',
 })
 export class SideMenuComponent {
+  apiService = inject(ApiService)
+  router = inject(Router)
 
+  logout() {
+    this.apiService.logout()
+      .subscribe({
+        next: () => {
+          this.router.navigate(['login'])
+        }
+      })
+  }
 }

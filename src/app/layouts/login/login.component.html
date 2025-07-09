@@ -1,7 +1,22 @@
-<div class="h-screen flex flex-col items-center justify-center">
-  <input class="bg-white text-black" type="email" [value]="email()" placeholder="email" (change)="email.set(txtEmail.value)"
-    #txtEmail (input)="email.set(txtEmail.value)" required>
-  <input class="bg-white text-black" type="password" [value]="password()" placeholder="contraseña"
-    (change)="password.set(txtPassword.value)" #txtPassword (input)="password.set(txtPassword.value)" required>
-  <button (click)="login()" class="btn btn-primary">Login</button>
+<div class="login-background">
+  <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 400px">
+      <h1 class="text-start">Login to</h1>
+      <h5 class="text-start">start manage your books</h5>
+      <hr>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input class="form-control" name="email" type="email" [value]="email()" (change)="email.set(txtEmail.value)"
+          #txtEmail (input)="email.set(txtEmail.value)" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input class="form-control" name="password" type="password" [value]="password()"
+          (change)="password.set(txtPassword.value)" #txtPassword (input)="password.set(txtPassword.value)" required>
+      </div>
+
+      <button (click)="login()" class="btn btn-success">Login</button>
+    </div>
+  </div>
 </div>

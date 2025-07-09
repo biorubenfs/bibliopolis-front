@@ -1,12 +1,7 @@
-<div class="p-4">
-  <app-side-menu-header>
-
-  </app-side-menu-header>
-
-  <hr>
-
-  <app-side-menu-options>
-
-  </app-side-menu-options>
-
-</div>
+<section class="d-flex flex-column">
+  <h2 class="text-white text-center mb-3">Bibliopolis</h2>
+  <button routerLink="libraries" class="btn btn-success mb-2">Mis bibliotecas</button>
+  <button routerLink="explore" class="btn btn-success mb-2">Explorar</button>
+  <button routerLink="profile" class="btn btn-success mb-2">Perfil</button>
+  <button (click)="logout()" class="btn btn-success mb-2">Cerrar Sesión</button>
+</section>

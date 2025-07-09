@@ -1,6 +1,11 @@
-<div class="flex flex-row h-screen">
-  <app-side-menu class="w-64 bg-base-200"></app-side-menu>
-  <div class="flex-1 p-4 overflow-auto">
+<div class="d-flex vh-100">
+  <!-- Sidebar -->
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh; position: fixed">
+    <app-side-menu></app-side-menu>
+  </div>
+
+  <!-- dashboard main content -->
+  <div class="flex-grow-1 p-3" style="margin-left: 280px;">
     <router-outlet></router-outlet>
   </div>
 </div>

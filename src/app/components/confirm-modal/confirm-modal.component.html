@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h4 class="modal-title">Confirmar Acción</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <h6 class="text-center">{{message}} <strong> {{item}} </strong></h6>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+  <button class="btn btn-success" (click)="confirm()">Confirmar</button>
+</div>
