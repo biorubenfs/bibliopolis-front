@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { of } from 'rxjs';
+import { of, tap } from 'rxjs';
 import { UserBooksListComponent } from "../../components/user-books-list/user-books-list.component";
 
 @Component({
@@ -32,13 +32,10 @@ export class LibraryDetailsPageComponent {
   });
 
   deleteUserBookById(userBookId: string) {
-    const updUserBooks = this.userBooksResource.value()?.filter(userBook => userBook.id !== userBookId)
-    
-    this.apiService.deleteLibraryBook(this.libraryId, userBookId)
-      .subscribe({
-        next: () => {
-            this.userBooksResource.set(updUserBooks)
-        }
+    this.apiService.deleteLibraryBook(this.libraryId, userBookId).pipe(
+      tap(() => {
+        this.userBooksResource.reload();
       })
+    ).subscribe();
   }
 }
