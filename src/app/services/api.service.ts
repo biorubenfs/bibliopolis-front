@@ -96,6 +96,17 @@ export class ApiService {
         map((res) => UserBookMapper.apiUserBooksToUserBooks(res.results)),
         catchError((error) => {
           console.log(error)
+          return throwError(() => new Error(`cannot get user books of library ${id}`))
+        })
+      )
+  }
+
+  deleteLibraryBook(libraryId: string, userBookId: string): Observable<void> {
+    return this.http
+      .delete<void>(`${API_URL}/libraries/${libraryId}/books/${userBookId}`, { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.log(error)
           return throwError(() => new Error('cannot get user books'))
         })
       )

@@ -13,4 +13,8 @@
   </div>
 </div>
 
-<app-user-books-list [libraryId]="this.libraryId"></app-user-books-list>
+<app-user-books-list 
+  [libraryId]="this.libraryId" 
+  [userBooks]="userBooksResource.value() ?? []" 
+  (_deleteUserBook)="deleteUserBookById($event)">
+</app-user-books-list>

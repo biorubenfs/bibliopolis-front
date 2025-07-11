@@ -1,8 +1,6 @@
-import { Component, inject, input } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
-import { of } from 'rxjs';
-import { ApiService } from '../../services/api.service';
+import { Component, input, output } from '@angular/core';
 import { UserBookCardComponent } from "../user-book-card/user-book-card.component";
+import { UserBook } from '../../interfaces/api.interfaces';
 
 @Component({
   selector: 'app-user-books-list',
@@ -10,14 +8,8 @@ import { UserBookCardComponent } from "../user-book-card/user-book-card.componen
   templateUrl: './user-books-list.component.html',
 })
 export class UserBooksListComponent {
-  apiService = inject(ApiService)
   libraryId = input.required<string>()
+  userBooks = input.required<Array<UserBook>>()
 
-  userBooksResource = rxResource({
-    request: () => ({ libraryId: this.libraryId }),
-    loader: ({ request }) => {
-      if (!request) return of();
-      return this.apiService.getLibraryBooks(request.libraryId());
-    }
-  });
+  _deleteUserBook = output<string>() // propaga el evento del hijo hacia arriba (para que el abuelo pueda escuchar)
 }

@@ -19,7 +19,7 @@
   <hr>
 </section>
 
-@for (book of userBooksResource.value(); track book.id) {
-  <app-user-book-card [userBook]="book"></app-user-book-card>
+@for (book of userBooks(); track book.id) {
+  <app-user-book-card [userBook]="book" (_deleteUserBook)="_deleteUserBook.emit($event)"></app-user-book-card>
 <hr>
 }

@@ -22,4 +22,23 @@ export class LibraryDetailsPageComponent {
       return this.apiService.getLibraryById(request.libraryId);
     }
   });
+
+  userBooksResource = rxResource({
+    request: () => ({ libraryId: this.libraryId }),
+    loader: ({ request }) => {
+      if (!request) return of();
+      return this.apiService.getLibraryBooks(request.libraryId);
+    }
+  });
+
+  deleteUserBookById(userBookId: string) {
+    const updUserBooks = this.userBooksResource.value()?.filter(userBook => userBook.id !== userBookId)
+    
+    this.apiService.deleteLibraryBook(this.libraryId, userBookId)
+      .subscribe({
+        next: () => {
+            this.userBooksResource.set(updUserBooks)
+        }
+      })
+  }
 }
