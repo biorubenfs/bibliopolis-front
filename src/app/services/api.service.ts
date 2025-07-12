@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiLibraryResponse, ApiUserBooksListResponse, ApiUserResponse, Book, Library, User, UserBook } from '../interfaces/api.interfaces';
@@ -85,6 +85,17 @@ export class ApiService {
         catchError((error) => {
           console.log(error)
           return throwError(() => new Error('cannot create library'))
+        })
+      )
+  }
+  
+  addBookToLibrary(libraryId: string, isbn: string): Observable<void> {
+    return this.http
+      .post<void>(`${API_URL}/libraries/${libraryId}/books`, { isbn }, { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.log(error)
+          return throwError(() => new Error('cannot get user books'))
         })
       )
   }

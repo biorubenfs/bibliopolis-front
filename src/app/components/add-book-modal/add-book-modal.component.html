@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title">Agregar Libro</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <h6 class="text-center">Agregar libro a biblioteca</h6>
+
+  <form [formGroup]="searchForm">
+    <div class="mb-3">
+      <input formControlName="search" id="search" class="form-control" placeholder="Introduce un isbn"/>
+    </div>
+  </form>
+  <button class="btn btn-success" (click)="submit()">Buscar</button>
+</div>
+
+<div class="modal-body">
+  <span>{{title()}}</span>
+  <span>{{isbn()}}</span>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+  <button class="btn btn-success" (click)="confirm()">Agregar a Biblioteca</button>
+</div>
