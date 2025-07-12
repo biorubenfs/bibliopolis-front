@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiLibraryResponse, ApiUserBooksListResponse, ApiUserResponse, Book, Library, User, UserBook } from '../interfaces/api.interfaces';
+import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiLibraryResponse, ApiUserBookResponse, ApiUserBooksListResponse, ApiUserResponse, Book, Library, User, UserBook } from '../interfaces/api.interfaces';
 import { BookMapper } from '../mappers/book.mapper';
 import { LibraryMapper } from '../mappers/library.mapper';
 import { UserMapper } from '../mappers/user.mapper';

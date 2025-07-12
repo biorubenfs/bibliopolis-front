@@ -43,7 +43,7 @@ export interface ApiUserBookAttributes {
   userId: string
   bookTitle: string
   bookAuthors: Array<string>
-  bookCover: number
+  bookCoverUrl: string
   bookIsbn: string
   notes: string
   rating: number
@@ -104,6 +104,10 @@ export interface User extends ApiUserAttributes {
 export interface ApiUserBooksListResponse  {
   results: Array<ApiUserBookEntity>
   paginationInfo: PaginationInfo
+}
+
+export interface ApiUserBookResponse {
+  results: ApiBookEntity
 }
 
 export interface UserBook extends ApiUserBookAttributes {
