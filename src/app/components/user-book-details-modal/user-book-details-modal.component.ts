@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserBook } from '../../interfaces/api.interfaces';
@@ -14,6 +14,7 @@ export class UserBookDetailsModalComponent {
   @Input() userBook!: UserBook // Angular no admite Signals en los componentInstance de NgbModal aún
   userBookForm: FormGroup
   apiService = inject(ApiService)
+  rating = signal<number>(0)
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -23,6 +24,7 @@ export class UserBookDetailsModalComponent {
       rating: [''],
       notes: ['']
     });
+    // this.rating.set(this.userBook.rating ?? 0)
   }
 
   update() {

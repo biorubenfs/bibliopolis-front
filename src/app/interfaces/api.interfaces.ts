@@ -45,8 +45,8 @@ export interface ApiUserBookAttributes {
   bookAuthors: Array<string>
   bookCoverUrl: string
   bookIsbn: string
-  notes: string
-  rating: number
+  notes: null | string
+  rating: null | number
   createdAt: Date
   updatedAt: Date
 }
