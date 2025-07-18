@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title">Libro</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <div class="d-flex flex-row gap-3">
+    <div>
+      <img [src]="userBook.bookCoverUrl" alt="Cubierta no disponible">
+    </div>
+    <div>
+      <h3 class="fw-bold">{{userBook.bookTitle}}</h3>
+      <hr>
+      <div class="d-flex flex-row align-items-center gap-2">
+        <img [src]="'assets/images/ratings/' + (userBook.rating ?? 0) + '.png'" alt="Rating image" class="img-fluid" style="max-height: 40px; height: auto; width: 80%;">
+        <span class="fs-5">{{userBook.rating ?? 0}}/10</span>
+      </div>
+      <p>Notas: {{userBook.notes}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="cancel()">Cerrar</button>
+  <button class="btn btn-success" (click)="update()">Actualizar</button>
+</div>

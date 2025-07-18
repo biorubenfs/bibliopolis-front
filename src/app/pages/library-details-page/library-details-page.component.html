@@ -1,3 +1,24 @@
-<p>library-details-page works!</p>
-<span>{{libraryResource.value()?.id}}</span>
-<span>{{libraryResource.value()?.description}}</span>
+<h2 class="text-center">{{libraryResource.value()?.name}}</h2>
+
+<div class="p-3 mb-3" style="border: 0.1rem solid lightgrey; border-radius: 10px;">
+  <h5>Detalles de la librería</h5>
+  <div class="col-3">
+    <div class="mb-3">
+      <input type="text" class="form-control" [placeholder]="libraryResource.value()?.name">
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" [placeholder]="libraryResource.value()?.description">
+    </div>
+    <button class="btn btn-success">Actualizar</button>
+  </div>
+</div>
+
+<div>
+  <button class="btn btn-success" (click)="openAddBookModal()">Agregar Libro</button>
+</div>
+
+<app-user-books-list 
+  [libraryId]="this.libraryId" 
+  [userBooks]="userBooksResource.value() ?? []" 
+  (_deleteUserBook)="deleteUserBookById($event)">
+</app-user-books-list>
