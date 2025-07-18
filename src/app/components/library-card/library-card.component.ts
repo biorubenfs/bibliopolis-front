@@ -18,8 +18,7 @@ export class LibraryCardComponent {
 
   deleteLibraryById() {
     const modalRef = this.modalService.open(ConfirmModalComponent);
-    modalRef.componentInstance.message = 'Esta acción eliminará la biblioteca'
-    modalRef.componentInstance.item = this.library().name
+    modalRef.componentInstance.message = `Eliminar la biblioteca ${this.library().name}`
 
     modalRef.result
       .then((confirmed) => {

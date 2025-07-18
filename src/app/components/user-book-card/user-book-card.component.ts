@@ -28,8 +28,7 @@ export class UserBookCardComponent {
 
   deleteUserBookById() {
     const modalRef = this.modalService.open(ConfirmModalComponent)
-    modalRef.componentInstance.message = 'Esta acción eliminará el libro de la biblioteca'
-    modalRef.componentInstance.item = this.userBook().bookTitle
+    modalRef.componentInstance.message = `¿Eliminar ${this.userBook().bookTitle} de la biblioteca?`
 
     modalRef.result
       .then((confirmed) => {
