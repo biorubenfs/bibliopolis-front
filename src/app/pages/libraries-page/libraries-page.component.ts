@@ -45,13 +45,14 @@ export class LibrariesPageComponent {
   }
 
   deleteLibrary(id: string) {
-    const updatedLibraries = this.libraries().filter(lib => lib.id !== id)
-
     this.apiService.deleteLibraryById(id)
-      .subscribe({
-        next: () => {
-          this.libraries.set(updatedLibraries)
-        }
+      .subscribe(() => {
+        this.apiService.getUserLibraries()
+          .subscribe({
+            next: (libraries) => {
+              this.libraries.set(libraries)
+            }
+          })
       })
   }
 }

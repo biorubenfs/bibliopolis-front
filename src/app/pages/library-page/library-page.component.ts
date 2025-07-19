@@ -6,13 +6,14 @@ import { of, tap } from 'rxjs';
 import { UserBooksListComponent } from "../../components/user-books-list/user-books-list.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddBookModalComponent } from '../../components/add-book-modal/add-book-modal.component';
+import { UserBook } from '../../interfaces/api.interfaces';
 
 @Component({
-  selector: 'app-library-details-page',
+  selector: 'app-library-page',
   imports: [UserBooksListComponent],
-  templateUrl: './library-details-page.component.html',
+  templateUrl: './library-page.component.html',
 })
-export class LibraryDetailsPageComponent {
+export class LibraryPageComponent {
   modalService = inject(NgbModal)
   private apiService = inject(ApiService);
 
@@ -34,8 +35,8 @@ export class LibraryDetailsPageComponent {
     }
   });
 
-  deleteUserBookById(userBookId: string) {
-    this.apiService.deleteLibraryBook(this.libraryId, userBookId).pipe(
+  deleteUserBookById(userBook: UserBook) {
+    this.apiService.deleteLibraryBook(this.libraryId, userBook.id).pipe(
       tap(() => {
         this.userBooksResource.reload();
       })
