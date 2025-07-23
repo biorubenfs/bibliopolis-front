@@ -5,7 +5,7 @@ import { ExplorePageComponent } from './pages/explore-page/explore-page.componen
 import { BookDetailsPageComponent } from './pages/book-details-page/book-details-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { LoginComponent } from './layouts/login/login.component';
-import { LibraryDetailsPageComponent } from './pages/library-details-page/library-details-page.component';
+import { LibraryPageComponent } from './pages/library-page/library-page.component';
 
 export const routes: Routes = [
   {
@@ -22,7 +22,7 @@ export const routes: Routes = [
       },
       {
         path: 'libraries/:id',
-        component: LibraryDetailsPageComponent
+        component: LibraryPageComponent
       },
       {
         path: 'explore',

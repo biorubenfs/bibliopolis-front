@@ -20,5 +20,5 @@
 <app-user-books-list 
   [libraryId]="this.libraryId" 
   [userBooks]="userBooksResource.value() ?? []" 
-  (_deleteUserBook)="deleteUserBookById($event)">
+  (deleteUserBook)="deleteUserBookById($event)">
 </app-user-books-list>
