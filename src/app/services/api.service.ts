@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, ObservableInput, throwError } from 'rxjs';
 import { ApiBookResponse, ApiBooksListResponse, ApiLibrariesListResponse, ApiLibraryResponse, ApiUserBookResponse, ApiUserBooksListResponse, ApiUserResponse, Book, Library, User, UserBook } from '../interfaces/api.interfaces';
 import { BookMapper } from '../mappers/book.mapper';
 import { LibraryMapper } from '../mappers/library.mapper';
@@ -119,6 +119,18 @@ export class ApiService {
         catchError((error) => {
           console.log(error)
           return throwError(() => new Error('cannot get user books'))
+        })
+      )
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Observable<void> {
+    const body = { currentPassword, newPassword }
+    return this.http
+      .patch<void>(`${API_URL}/users/me/password`, body, { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.log(error)
+          return throwError(() => new Error('cannot change password'))
         })
       )
   }
